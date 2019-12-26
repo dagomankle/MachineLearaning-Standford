@@ -47,10 +47,11 @@ x = zeros(n, 1);
 %              x = [ 0 0 0 0 1 0 0 0 ... 0 0 0 0 1 ... 0 0 0 1 0 ..];
 %
 %
+index = unique(word_indices);
 
-
-
-
+for i = index  
+  x(i) = 1;
+endfor
 
 
 

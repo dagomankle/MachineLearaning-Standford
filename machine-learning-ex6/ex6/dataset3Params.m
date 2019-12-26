@@ -23,11 +23,21 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+bpred = inf;
+values = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
 
-
-
-
-
+for Ca = values
+  for sb = values
+    model = svmTrain(X, y, Ca, @(x1, x2) gaussianKernel(x1, x2, sb));
+    predictions = svmPredict(model, Xval);
+    pred = mean(double(predictions ~= yval));
+    if pred < bpred
+      C = Ca;
+      sigma = sb;
+      bpred = pred;
+    endif
+  endfor
+endfor
 
 % =========================================================================
 
